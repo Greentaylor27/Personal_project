@@ -20,18 +20,27 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 # --------------------
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-# --------------------
-# Initialize Discord bot
-# --------------------
 intents = discord.Intents.default()
 intents.message_content = True
+
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-# --------------------
-# Ping command (Test)
-# --------------------
-@bot.command(name="ping")
-async def ping(ctx):
-  await ctx.send("Pong!")
+@bot.event
+async def on_ready():
+  print(f"✅ Bot connected as {bot.user}")
 
-bot.run(DISCORD_TOKEN)
+async def load_cogs():
+  for filename in os.listdir("./Cogs"):
+    if filename.endswith(".py") and filename != "__init__.py":
+      await bot.load_extension(f"Cogs.{filename[:-3]}")
+      print(f"Loaded Cogs: {filename}")
+
+async def main():
+  await load_cogs()
+  await bot.start(DISCORD_TOKEN)
+
+
+# Need to add a proper exit() for closing connection to bot so I'm not Ctrl+C to exit.
+
+
+asyncio.run(main())

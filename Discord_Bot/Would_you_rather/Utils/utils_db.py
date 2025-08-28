@@ -1,14 +1,73 @@
+from supabase import Client
 import csv
-from utils.supabase import init_supabase
+import uuid
 
-def insert_questions_to_db(csv_file):
-  supabase = init_supabase()
+def check_if_table_exists(supabase: Client, table_name: str) -> bool:
+    """Check if a table exists in the Supabase database."""
+    try:
+        result = (
+            supabase.postgrest
+            .from_("information_schema.tables")
+            .select("table_name")
+            .eq("table_name", table_name)
+            .execute()
+        )
+        return len(result.data) > 0
+    except Exception as e:
+        return False
 
-  with open(csv_file, "r") as f:
-    reader = csv.DictReader(f)
-    rows = [row for row in reader]
 
-    if rows:
-      data, count = supabase.table("questions").insert(rows).execute()
-      return count
-    return 0
+def load_csv_without_header(csv_path: str) -> list[dict]:
+  """
+    Loads csv and returns a list of dict skipping the header automatically
+
+  Args:
+      csv_path (str): Path to the CSV
+
+  Returns:
+      list[dict]: Basically the csv without the header
+  """
+  rows = []
+  with open(csv_path, "r") as f:
+      reader = csv.DictReader(f)
+      for row in reader:
+          rows.append(row)
+  return rows
+
+def insert_by_row_into_db(supabase: Client, csv_path: str, table_name: str) -> int:
+  """
+    Reads a CSV file and inserts rows into a specified Supabase table
+
+  Args:
+      supabase (Client): Supabase Client
+      csv_path (str): Path to CSV
+      table_name (str): Table name
+
+  Returns:
+      int: 0 for success
+  """
+  rows_inserted = 0
+  try:
+     rows = load_csv_without_header(csv_path)
+
+     for row in rows:
+        data = {
+           "id": str(uuid.uuid4()),
+           "question": row["question"].strip()
+           }
+        response = supabase.table(table_name).insert(data).execute()
+
+        if response.data:
+           rows_inserted += 1
+        else:
+           print("Insert failed:", response)
+
+     print(f"✅ {rows_inserted} rows inserted into '{table_name}'")
+     return rows_inserted
+
+  except Exception as e:
+     print("Error inserting rows:", e)
+     return rows_inserted
+
+
+

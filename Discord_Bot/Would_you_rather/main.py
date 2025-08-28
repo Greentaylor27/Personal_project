@@ -1,20 +1,37 @@
 import os
+import random
+import asyncio
 from dotenv import load_dotenv
-from supabase import create_client
-import Utils.create_starter_csv
-from Utils.utils_db import insert_by_row_into_db
+import discord
+from discord.ext import commands
+from supabase import create_client, Client
 
+# --------------------
+# Load environment variables
+# --------------------
 load_dotenv()
 
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
-supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+# --------------------
+# Initialize Supabase client
+# --------------------
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-Utils.create_starter_csv
+# --------------------
+# Initialize Discord bot
+# --------------------
+intents = discord.Intents.default()
+intents.message_content = True
+bot = commands.Bot(command_prefix="!", intents=intents)
 
-csv_path = "Data/questions.csv"
-table_name = "questions"
+# --------------------
+# Ping command (Test)
+# --------------------
+@bot.command(name="ping")
+async def ping(ctx):
+  await ctx.send("Pong!")
 
-rows_inserted = insert_by_row_into_db(supabase, csv_path, table_name)
-print(f"✅ {rows_inserted} rows inserted into '{table_name}'")
+bot.run(DISCORD_TOKEN)

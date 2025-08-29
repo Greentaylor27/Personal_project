@@ -1,21 +1,21 @@
-id,question
-a722a74f-afbe-469d-b6ca-125967137e8e,"Fight  horse sized duck OR fight  duck sized horses"
-6cab78e7-f84a-41ed-ad9d-478ef4300e55,"Be chronically underdressed all the time OR chronically overdressed all the time"
-0b4eb083-c04f-4af0-baac-1f04a5312809,"Always have B.O.and not know it OR always smell B.O. on everyone else"
-9197309d-7136-44a7-8ba7-58fb1a8ee282,"Have to wear every shirt inside out OR every pair of pants backwards."
-47dd57a9-dc33-4fc0-a61e-b2ef726ab905,"Always be stuck in traffic but find the perfect parking spot every time OR never get stuck in traffic but always take forever to park"
-6f8d0869-e72d-4e1a-bda7-7ff03bc99d12,"Only be able to whisper OR only be able to shout everything you say"
-1113f00d-07a9-451c-b903-468d0b5a2a73,"Have fingers as long as your legs OR legs as short as your fingers"
-496eff85-f7f2-41e3-aa95-5157201e946c,"Eat pizza for every meal OR never be able to eat pizza again."
-9b047df5-a2cd-48e4-a94e-563669d4d095,"Be able to teleport anywhere but only once a day OR fly, but only as fast as you can walk"
-d71112e6-9582-49aa-a185-f0a63f696ab8,"Have to use flip phones forever OR only communicate through email forever"
-dfe19153-be09-40a0-8a20-949ff8f6f7c5,"Live without music OR live without movies/TV"
-769b6e2c-63ad-49ad-a7a7-143099d84ca3,"Have your dream job but make minimum wage OR have a boring job but make millions"
-e1f07f10-ab85-4561-92e7-1640a0458e43,"Only be able to walk backwards OR only be able to run everywhere"
-3fd36bb4-f8f4-4bc0-af95-130fef6f0acf,"Always have wet socks OR always have a rock in your shoe"
-2fcceddc-1e03-441f-8091-7b595ca79efe,"Never be able to use GPS again OR never be able to use search engines again"
-97b3d5e4-1f32-4913-a0a8-5e1faf4dc026,"Be invisible for a day OR be able to read minds for a day"
-f0b2cd39-a40c-4ffc-8910-73922277b4cb,"Have to sing everytime you speak OR dance everywhere you walk"
-e21fc787-d778-48b0-8517-03818c8bff5e,"Be able to pause time OR be able to rewind time  seconds"
-318361d6-e343-43f6-acc8-96d823e77a35,"Have free Wi-Fi everywhere you go OR have free coffee everywhere you go"
-332b7aa0-26cf-4763-86fc-ea7cea434cf1,"Always feel like you need to sneeze but can't OR always have the hiccups."
+id,option_a,option_b
+077bc86c-debc-4793-acb8-dba9e5f71b66,Fight  horse sized duck,fight  duck sized horses
+5ad0f570-59cd-4581-8230-b8be1862639a,Be chronically underdressed all the time,chronically overdressed all the time
+e4f5937a-e42f-404f-8046-14c499564ba7,Always have B.O.and not know it,always smell B.O. on everyone else
+6f5f9a29-a395-4661-bf17-cfe09f601bf4,Have to wear every shirt inside out,every pair of pants backwards.
+81946875-f956-412a-9153-4912814de4c2,Always be stuck in traffic but find the perfect parking spot every time,never get stuck in traffic but always take forever to park
+77653435-43ae-455f-b2c6-8aab4938d3e3,Only be able to whisper,only be able to shout everything you say
+f814102b-3a89-44a5-81ea-3b3c6ea3bcc9,Have fingers as long as your legs,legs as short as your fingers
+318fcca1-9aa3-4b5b-acfc-fd2af5d4e587,Eat pizza for every meal,never be able to eat pizza again.
+da181430-646f-4e16-a159-ed6c11908bf2,Be able to teleport anywhere but only once a day,fly, but only as fast as you can walk
+ba02cf14-e751-425c-9cb8-90cd8431a8ad,Have to use flip phones forever,only communicate through email forever
+6cc77f9c-59c2-4f15-b288-be2137e236fb,Live without music,live without movies/TV
+32484e71-a06b-4243-a83d-c127f028d3d8,Have your dream job but make minimum wage,have a boring job but make millions
+8f8154e3-f04c-403c-9858-1c4e5dd0e0bd,Only be able to walk backwards,only be able to run everywhere
+c08d13cd-c43d-4e5d-bbdb-701d9a5d74bd,Always have wet socks,always have a rock in your shoe
+67248216-67ba-4994-8951-9f8ee338b151,Never be able to use GPS again,never be able to use search engines again
+fbf2d755-e98e-4a5d-bcc8-3ce82a46e969,Be invisible for a day,be able to read minds for a day
+19c1e081-103c-4811-bf4c-308b3bd80cd7,Have to sing everytime you speak,dance everywhere you walk
+7c1de02d-f0c4-4c8e-8df6-d641d2b4e5d9,Be able to pause time,be able to rewind time  seconds
+d3905291-91d4-42e7-99eb-09ce320829e9,Have free Wi-Fi everywhere you go,have free coffee everywhere you go
+1ed94b47-3332-4f8f-afab-24573fcda2ce,Always feel like you need to sneeze but can't,always have the hiccups.

@@ -6,10 +6,10 @@ with open("Data/question.txt", "r") as file:
   lines = file.readlines()
 
 with open("Data/questions.csv", "w") as f:
-  f.write("id,question\n") #header
+  f.write("id,option_a,option_b\n") #header
 
   for line in lines:
-    id = uuid.uuid4()
+    qid = uuid.uuid4()
     parts = line.split(". ", 1)
 
     if len(parts) < 2:
@@ -17,9 +17,15 @@ with open("Data/questions.csv", "w") as f:
     
     question = parts[1].strip()
     question = ''.join(c for c in question if c not in numbers) # remove numbers if needed
-    question = question.replace('"', '""')
-    question = f'"{question}"'
+    
+    # Splitting at OR
+    if " OR " not in question:
+      continue
+    option_a, option_b = map(str.strip, question.split(" OR ", 1))
+    
+    option_a = option_a.replace('"', '""')
+    option_b = option_b.replace('"', '""')
 
-    f.write(f"{id},{question}\n")
+    f.write(f"{qid},{option_a},{option_b}\n")
 
 print("CSV file created successfully.")

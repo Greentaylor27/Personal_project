@@ -1,4 +1,5 @@
 from supabase import Client
+import random
 import csv
 import uuid
 
@@ -53,7 +54,8 @@ def insert_by_row_into_db(supabase: Client, csv_path: str, table_name: str) -> i
      for row in rows:
         data = {
            "id": str(uuid.uuid4()),
-           "question": row["question"].strip()
+           "option_a": row["option_a"].strip(),
+           "option_b": row["option_b"].strip(),
            }
         response = supabase.table(table_name).insert(data).execute()
 
@@ -69,5 +71,29 @@ def insert_by_row_into_db(supabase: Client, csv_path: str, table_name: str) -> i
      print("Error inserting rows:", e)
      return rows_inserted
 
+def get_random_question(supabase: Client, table_name: str) -> dict | None:
+    """
+    Fetch a random question from the Supabase table.
 
+    Args:
+        supabase (Client): Supabase client instance.
+        table_name (str): Name of the table
 
+    Returns:
+        dict | None: a random question with option_a and option_b, or None
+    """
+    try:
+       # Pull all rows
+       response = supabase.table(table_name).select("*").execute()
+       rows = response.data
+
+       if not rows:
+          return None
+       
+       # Pick a random row
+       question = random.choice(rows)
+       return question
+    
+    except Exception as e:
+       print("Error fetching question:", e)
+       return None

@@ -19,9 +19,23 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY")
 
 
 # --------------------
-# Initialize Supabase client
+# Initialize Supabase client (sync)
 # --------------------
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+
+# --------------------
+# Async wrapper for supabase
+# --------------------
+async def supabase_query(query_fn, *args, **kwargs):
+  """
+  Runs Supabase query in the thread rather than the queue
+  Example:
+    response = await supabase_query(
+      supabase.table("users").select("*").eq("id", 123).execute()
+    )
+  """
+  return await asyncio.to_thread(query_fn, *args, **kwargs)
 
 
 # --------------------
@@ -32,6 +46,7 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 bot.supabase = supabase
+bot.supabase_query = supabase_query
 
 # --------------------
 # Events

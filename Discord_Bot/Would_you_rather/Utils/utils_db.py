@@ -2,6 +2,7 @@ from supabase import Client
 import random
 import csv
 import uuid
+from main import supabase_query
 
 def check_if_table_exists(supabase: Client, table_name: str) -> bool:
     """Check if a table exists in the Supabase database."""
@@ -97,3 +98,17 @@ def get_random_question(supabase: Client, table_name: str) -> dict | None:
     except Exception as e:
        print("Error fetching question:", e)
        return None
+
+async def get_user(supabase, user_id: int):
+   def query():
+      return supabase.table("users").select("*").eq("id", str(user_id)).execute()
+   return await supabase_query(query)
+
+async def add_user(supabase, user_id: int, username: str):
+   def query():
+      return supabase.table("users").insert({
+         "id": str(user_id),
+         "name": username,
+         "role": "Collaborator"
+      }).execute()
+   return await supabase_query(query)

@@ -2,7 +2,8 @@ import random
 import discord
 import asyncio
 from discord.ext import commands
-from Utils.utils_db import get_random_question
+from Utils.utils_db import get_random_question, get_user, add_user
+from main import supabase_query
 
 
 
@@ -15,27 +16,21 @@ class WouldYouRather(commands.Cog):
 
   async def ensure_user_registered(self, user: discord.User):
     """Check if user exists in DB, if not register them as collaborator."""
-    user_id = int(user.id)
+    user_id = 108101984430628864
     username = str(user)
 
-    # Check if exists
-    print("Beginning of checking user")
-    response = self.supabase.table("users").select("*").eq("id", user_id).execute()
-    print(f"Response: {response}")
-    
+    print(f"User id: {user_id}\nUsername: {username}")
+
+    print(f"Response before: {response}")
+
+    response = await get_user(self.supabase, user_id)
     if response.data:
-      print(response.data[0])
       return response.data[0]
     
-    # Otherwise create them
-    insert_response = self.supabase.table("users").insert({
-      "id": int(user_id),
-      "name": username,
-      "role": "Collaborator"
-    }).execute()
-    print(f"Inserted: {insert_response}")
-
-    return insert_response.data[0] if insert_response.data else None
+    print(f"Response after: {response}")
+    
+    insert_reponse = await add_user(self.supabase, user_id, username)
+    return insert_reponse.data[0] if insert_reponse.data else None
 
   @commands.command(name="wyr")
   async def would_you_rather(self, ctx):
